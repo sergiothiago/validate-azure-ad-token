@@ -18,15 +18,21 @@ import java.net.URL;
 public class AzureADValidateTokenService {
 
     private static final Logger logger = LoggerFactory.getLogger(AzureADValidateTokenService.class);
-    private static final String JWKS_URL_TEMPLATE = "https://login.microsoftonline.com/%s/discovery/v2.0/keys";  // Template para a URL do JWKS
 
     @Value("${azure.ad.tenantid}")
     private String tenantId;
+
+    @Value("${azure.ad.clientid}")
+    private String clientid;
 
     public Boolean isTokenValid(String tokenJwt) {
         logger.info("Iniciando a validação do token JWT.");
 
         try {
+            String JWKS_URL_TEMPLATE =
+                    "https://login.microsoftonline.com/" +
+                            tenantId + "/discovery/keys?appid=" + clientid;  // Template para a URL do JWKS
+
             // URL do endpoint OpenID do Azure AD
             String jwksUrl = String.format(JWKS_URL_TEMPLATE, tenantId);
 
