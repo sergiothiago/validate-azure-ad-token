@@ -1,7 +1,8 @@
 package com.validate.ad.controller;
 
 import com.validate.ad.service.AzureADValidateTokenService;
-import com.validate.ad.vo.tokenVO;
+import com.validate.ad.vo.OutputVO;
+import com.validate.ad.vo.TokenVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +18,11 @@ public class AzureAdValidateToken {
     private AzureADValidateTokenService azureADValidateTokenService;
 
     @PostMapping
-    public ResponseEntity<Boolean> isTokenValid(@RequestBody tokenVO tokenVO){
+    public ResponseEntity<OutputVO> isTokenValid(@RequestBody TokenVO tokenVO){
 
-        Boolean isValid = azureADValidateTokenService.isTokenValid(tokenVO.getToken());
+        OutputVO outputVO = azureADValidateTokenService.isTokenValid(tokenVO.getToken());
 
-        return ResponseEntity.ok(isValid);
+        return ResponseEntity.ok(outputVO);
     }
 
 }

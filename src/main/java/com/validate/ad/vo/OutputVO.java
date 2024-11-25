@@ -1,16 +1,17 @@
 package com.validate.ad.vo;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class tokenVO {
+@Builder
+public class OutputVO {
 
-    @NotNull(message = "O token não pode ser nulo")
-    String token;
+    Boolean isValid;
 
+    String message;
 }
